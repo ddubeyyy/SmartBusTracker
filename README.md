@@ -12,7 +12,8 @@ A web-based Smart Bus Tracking System that helps **students**, **drivers**, and 
 - 👨‍🏫 Admin dashboard to monitor everything
 - 📦 CI/CD pipeline with Jenkins & Docker
 - 🌐 Fully deployable using Apache Tomcat
-![Login Page](src/main/resources/Screenshot 2025-07-11 070626.png)
+ ![Login Page](src/main/resources/Screenshot%202025-07-11%20070626.png)
+
 
 ---
 

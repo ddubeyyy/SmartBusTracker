@@ -1,71 +1,109 @@
-# SmartBusTracker 🚍
+# 🚍 Smart Bus Tracking Web App
 
-SmartBusTracker is a smart transportation management system designed to monitor and manage bus tracking for educational institutions or private bus services. It enables real-time tracking of buses, route management, and user-friendly access to location updates.
+A web-based Smart Bus Tracking System that helps **students**, **drivers**, and **administrators** track and manage buses in real time. This project aims to increase safety, convenience, and operational efficiency in educational or private transportation systems.
+
+---
+
+## ✨ Key Highlights
+
+- 🔒 Role-based login for Admin, Student, and Driver
+- 🚌 Add/edit buses, drivers, and routes
+- 📍 Track bus status and route
+- 👨‍🏫 Admin dashboard to monitor everything
+- 📦 CI/CD pipeline with Jenkins & Docker
+- 🌐 Fully deployable using Apache Tomcat
+![Login Page](src/main/resources/Screenshot 2025-07-11 070626.png)
 
 ---
 
 ## 🔧 Tech Stack
 
-- **Java (Servlets/JSP or Spring Boot)**
-- **MySQL / JDBC**
-- **Maven**
-- **Jenkins** (CI/CD)
-- **Docker**
-- **Apache Tomcat**
-- **HTML/CSS/JavaScript** (for frontend)
+| Layer        | Technologies                                |
+|--------------|---------------------------------------------|
+| Frontend     | HTML, CSS, JSP, JavaScript                  |
+| Backend      | Java (Servlets & JSP), JDBC, MySQL          |
+| Server       | Apache Tomcat 9                             |
+| DevOps       | Jenkins, Docker, Git, GitHub                |
+| Build Tool   | Maven                                       |
 
 ---
 
-## 📦 Features
+## 🧩 Modules & Features
 
-### 🚌 Bus Management
-- Add, update, and remove buses
-- Assign unique IDs and driver details
+### 🔐 Authentication
+- ✅ Login and Registration for **Student**, **Driver**, and **Admin**
+- ✅ Password validation and session handling
+- ✅ Role-based redirects
 
-### 👩‍🏫 User Authentication
-- Secure login for **Admin**, **Students**, and **Drivers**
-- Session-based login system
 
-### 🗺️ Real-Time Location Tracking
-- GPS coordinates simulation or integration (e.g., with Google Maps API)
-- Show current bus location on the map
+### 👨‍🏫 Admin Panel
+- 🚌 Add, update, delete buses
+- 👨‍✈️ Manage drivers and assign buses
+- 🗺️ Create and assign routes (source, stops, destination)
+- 🧾 View all users, buses, drivers, and routes
+- 📊 Generate reports of daily usage
 
-### 🧭 Route Management
-- Define routes: source, stops, destination
-- View estimated arrival times and delays
+### 🎓 Student Panel
+- 👁️ View assigned bus and its current location
+- 🗺️ See route map (static or simulated)
+- 🔁 Update profile and contact info
 
-### 🧾 Student Module
-- Login and view assigned bus details
-- See real-time location of their bus
-- Notifications (optional)
-
-### 👨‍💻 Admin Module
-- Dashboard to manage:
-  - Buses
-  - Drivers
-  - Routes
-  - Students
-- Generate reports and logs
-
-### 🧪 CI/CD Pipeline (DevOps)
-- Jenkins pipeline:
-  - Pull code from GitHub
-  - Build WAR using Maven
-  - Create Docker Image
-  - Push to Docker Hub
-  - Deploy container
+### 👨‍✈️ Driver Panel
+- 🚌 View assigned bus and route details
+- ✅ Mark trip as "Started" or "Completed"
+- 🧭 Option to update simulated location/status (for now)
 
 ---
 
-## 🚀 Project Structure
+## 🗄️ Database Schema (MySQL)
+
+### `users`
+| Field     | Type     | Description                      |
+|-----------|----------|----------------------------------|
+| id        | INT      | Primary Key                      |
+| name      | VARCHAR  | Full name                        |
+| email     | VARCHAR  | Unique email address             |
+| password  | VARCHAR  | Encrypted password               |
+| role      | ENUM     | 'admin', 'student', 'driver'     |
+| address   | TEXT     | Address (optional)               |
+
+### `buses`
+| Field       | Type     | Description                   |
+|-------------|----------|-------------------------------|
+| id          | INT      | Primary Key                   |
+| bus_number  | VARCHAR  | Unique Bus Number             |
+| driver_id   | INT      | Linked to `users.id`          |
+| route_id    | INT      | Linked to `routes.id`         |
+
+### `routes`
+| Field       | Type     | Description                   |
+|-------------|----------|-------------------------------|
+| id          | INT      | Primary Key                   |
+| source      | VARCHAR  | Starting point                |
+| destination | VARCHAR  | Endpoint                      |
+| stops       | TEXT     | Intermediate stop points      |
+
+---
+
+## 📂 Project Structure
 
 ```plaintext
 SmartBusTracker/
 ├── src/
-│   ├── main/
-│   │   ├── java/          # Java files (Servlets/Controllers/Services)
-│   │   └── webapp/        # JSP, HTML, CSS, JS files
+│   └── main/
+│       ├── java/
+│       │   └── servlets/         # Login, Register, Dashboard, Controllers
+│       └── webapp/
+│           ├── WEB-INF/
+│           │   └── web.xml       # Servlet mapping
+│           ├── jsp/
+│           │   ├── login.jsp
+│           │   ├── register.jsp
+│           │   ├── admin-dashboard.jsp
+│           │   ├── student-dashboard.jsp
+│           │   └── driver-dashboard.jsp
+│           └── assets/           # CSS, JS, images
+├── pom.xml
 ├── Dockerfile
 ├── Jenkinsfile
-├── pom.xml
 └── README.md

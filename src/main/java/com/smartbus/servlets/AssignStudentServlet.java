@@ -5,9 +5,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 @WebServlet("/assignStudent")
 public class AssignStudentServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(AssignStudentServlet.class.getName());
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
         String username = req.getParameter("student_username");
         int busId = Integer.parseInt(req.getParameter("bus_id"));
@@ -44,7 +48,7 @@ public class AssignStudentServlet extends HttpServlet {
             res.sendRedirect("adminDashboard.jsp?status=assigned");
 
         } catch (Exception e) {
-            e.printStackTrace();
+        	logger.log(Level.SEVERE, "Error adding bus", e);
             res.sendRedirect("adminDashboard.jsp?status=error");
         }
     }

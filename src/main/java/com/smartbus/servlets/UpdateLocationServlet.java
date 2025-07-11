@@ -3,41 +3,50 @@ package com.smartbus.servlets;
 import com.smartbus.util.DBConnection;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.io.IOException;
+import java.io.*;
 import java.sql.*;
+import java.util.logging.*;
+import org.json.JSONObject;
 
 @WebServlet("/updateLocation")
 public class UpdateLocationServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    private static final Logger logger = Logger.getLogger(UpdateLocationServlet.class.getName());
+
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
-        int driverId = (int) req.getSession().getAttribute("id");
-        String lat = req.getParameter("latitude");
-        String lng = req.getParameter("longitude");
+        HttpSession session = req.getSession(false);
+        if (session == null || !"driver".equals(session.getAttribute("role"))) {
+            res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
 
-        try (Connection con = DBConnection.getConnection()) {
-            // Get bus_id for this driver
-            PreparedStatement findBus = con.prepareStatement("SELECT bus_id FROM buses WHERE driver_id = ?");
-            findBus.setInt(1, driverId);
-            ResultSet rs = findBus.executeQuery();
+        String username = (String) session.getAttribute("username");
+        BufferedReader reader = req.getReader();
+        StringBuilder jsonBuilder = new StringBuilder();
+        String line;
 
-            if (rs.next()) {
-                int busId = rs.getInt("bus_id");
+        while ((line = reader.readLine()) != null) {
+            jsonBuilder.append(line);
+        }
 
-                PreparedStatement ps = con.prepareStatement(
-                    "REPLACE INTO bus_location (bus_id, latitude, longitude) VALUES (?, ?, ?)"
-                );
-                ps.setInt(1, busId);
-                ps.setString(2, lat);
-                ps.setString(3, lng);
+        try {
+            JSONObject json = new JSONObject(jsonBuilder.toString());
+            double lat = json.getDouble("latitude");
+            double lon = json.getDouble("longitude");
+
+            try (Connection con = DBConnection.getConnection()) {
+                PreparedStatement ps = con.prepareStatement("UPDATE users SET latitude = ?, longitude = ? WHERE username = ?");
+                ps.setDouble(1, lat);
+                ps.setDouble(2, lon);
+                ps.setString(3, username);
                 ps.executeUpdate();
 
-                res.sendRedirect("driverDashboard.jsp?status=updated");
-            } else {
-                res.sendRedirect("driverDashboard.jsp?status=nobus");
+                logger.info("Location updated for user: " + username);
+                res.setStatus(HttpServletResponse.SC_OK);
             }
-
         } catch (Exception e) {
-            e.printStackTrace();
-            res.sendRedirect("driverDashboard.jsp?status=error");
+            logger.log(Level.SEVERE, "Error updating location", e);
+            res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
     }
 }

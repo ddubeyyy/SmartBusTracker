@@ -2,14 +2,15 @@ package com.smartbus.servlets;
 
 import java.io.*;
 import java.sql.*;
-import javax.servlet.*;
+import java.util.logging.Level;
+
 import javax.servlet.http.*;
-import javax.servlet.annotation.*;
-
 import com.smartbus.util.DBConnection;
+import java.util.logging.Logger;
 
-@WebServlet("/getLocation")
 public class GetLocationServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(GetLocationServlet.class.getName());
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
         res.setContentType("application/json");
         PrintWriter out = res.getWriter();
@@ -41,8 +42,9 @@ public class GetLocationServlet extends HttpServlet {
             }
 
         } catch (Exception e) {
+            logger.log(Level.SEVERE, "Database error while fetching location", e);
             res.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            out.print("{\"error\": \"Database error: " + e.getMessage() + "\"}");
+            out.print("{\"error\": \"Internal error\"}");
         }
     }
 }

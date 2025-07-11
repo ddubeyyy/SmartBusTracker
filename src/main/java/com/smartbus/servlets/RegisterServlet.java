@@ -17,12 +17,14 @@ import java.util.logging.Level;
 @WebServlet("/register")
 
 public class RegisterServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
     private static final Logger logger = Logger.getLogger(RegisterServlet.class.getName());
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         String role = req.getParameter("role");
+        String collegeName = req.getParameter("college");
 
         try (Connection con = DBConnection.getConnection()) {
             PreparedStatement checkStmt = con.prepareStatement("SELECT id FROM users WHERE username = ?");
@@ -36,10 +38,11 @@ public class RegisterServlet extends HttpServlet {
             }
 
             String hashedPassword = HashUtil.hashPassword(password);
-            PreparedStatement ps = con.prepareStatement("INSERT INTO users (username, password_hash, role) VALUES (?, ?, ?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO users (username, password_hash, role, college_name) VALUES (?, ?, ?, ?)");
             ps.setString(1, username);
             ps.setString(2, hashedPassword);
             ps.setString(3, role);
+            ps.setString(4, collegeName);
             ps.executeUpdate();
 
             logger.info("New user registered: " + username + " as " + role);

@@ -4,9 +4,7 @@
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <!-- ✅ Other servlet declarations (like LoginServlet, RegisterServlet) -->
-
-    <!-- ✅ GetLocationServlet Mapping -->
+    <!-- ✅ Register GetLocationServlet -->
     <servlet>
         <servlet-name>GetLocationServlet</servlet-name>
         <servlet-class>com.smartbus.servlets.GetLocationServlet</servlet-class>
@@ -16,5 +14,12 @@
         <servlet-name>GetLocationServlet</servlet-name>
         <url-pattern>/getLocation</url-pattern>
     </servlet-mapping>
+    <welcome-file-list>
+    	<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	
+
+    
 
 </web-app>

@@ -12,9 +12,7 @@ A web-based Smart Bus Tracking System that helps **students**, **drivers**, and 
 - 👨‍🏫 Admin dashboard to monitor everything
 - 📦 CI/CD pipeline with Jenkins & Docker
 - 🌐 Fully deployable using Apache Tomcat
-<p align="center">
-  <img src="src/main/resources/Screenshot%202025-07-11%20070626.png" alt="Login Page" width="400"/>
-</p>
+
 
 
 
@@ -38,6 +36,15 @@ A web-based Smart Bus Tracking System that helps **students**, **drivers**, and 
 - ✅ Login and Registration for **Student**, **Driver**, and **Admin**
 - ✅ Password validation and session handling
 - ✅ Role-based redirects
+   Login Page
+<p align="center">
+  <img src="src/main/resources/Screenshot%202025-07-11%20070626.png" alt="Login Page" width="400"/>
+</p>
+
+  Register Page
+  <p align="center">
+  <img src="src/main/resources/Screenshot%202025-07-11%20070641.png" alt="Login Page" width="400"/>
+</p>
 
 
 ### 👨‍🏫 Admin Panel
@@ -46,16 +53,26 @@ A web-based Smart Bus Tracking System that helps **students**, **drivers**, and 
 - 🗺️ Create and assign routes (source, stops, destination)
 - 🧾 View all users, buses, drivers, and routes
 - 📊 Generate reports of daily usage
+  <p align="center">
+  <img src="src/main/resources/Screenshot%202025-07-11%20070755.png" alt="Login Page" width="400"/>
+</p>
 
 ### 🎓 Student Panel
 - 👁️ View assigned bus and its current location
 - 🗺️ See route map (static or simulated)
 - 🔁 Update profile and contact info
+  <p align="center">
+  <img src="src/main/resources/Screenshot%202025-07-11%20070737.png" alt="Login Page" width="400"/>
+</p>
 
 ### 👨‍✈️ Driver Panel
 - 🚌 View assigned bus and route details
 - ✅ Mark trip as "Started" or "Completed"
 - 🧭 Option to update simulated location/status (for now)
+
+  <p align="center">
+  <img src="src/main/resources/Screenshot%202025-07-11%20070716.png" alt="Login Page" width="400"/>
+</p>
 
 ---
 

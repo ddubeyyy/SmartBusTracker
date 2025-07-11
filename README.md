@@ -54,7 +54,7 @@ A web-based Smart Bus Tracking System that helps **students**, **drivers**, and 
 - 🧾 View all users, buses, drivers, and routes
 - 📊 Generate reports of daily usage
   <p align="center">
-  <img src="src/main/resources/Screenshot%202025-07-11%20070755.png" alt="Login Page" width="400"/>
+  <img src="src/main/resources/Screenshot%202025-07-11%20070755.png" alt="Login Page" width="600"/>
 </p>
 
 ### 🎓 Student Panel
@@ -62,7 +62,7 @@ A web-based Smart Bus Tracking System that helps **students**, **drivers**, and 
 - 🗺️ See route map (static or simulated)
 - 🔁 Update profile and contact info
   <p align="center">
-  <img src="src/main/resources/Screenshot%202025-07-11%20070737.png" alt="Login Page" width="400"/>
+  <img src="src/main/resources/Screenshot%202025-07-11%20070737.png" alt="Login Page" width="600"/>
 </p>
 
 ### 👨‍✈️ Driver Panel
@@ -71,7 +71,7 @@ A web-based Smart Bus Tracking System that helps **students**, **drivers**, and 
 - 🧭 Option to update simulated location/status (for now)
 
   <p align="center">
-  <img src="src/main/resources/Screenshot%202025-07-11%20070716.png" alt="Login Page" width="400"/>
+  <img src="src/main/resources/Screenshot%202025-07-11%20070716.png" alt="Login Page" width="600"/>
 </p>
 
 ---
